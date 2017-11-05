@@ -20,17 +20,24 @@ var template = (
 var user = {
     name: 'Johnny Choudhury-Lucas',
     age: 46,
-    location: 'Bristol, England'
+    location: 'Bristol, England',
 }
-var userName = 'Johnny Choudhury-Lucas'
-var userAge = 46
-var userLocation = 'Bristol, England'
+function getLocation(location) {
+    // Only render second value if the first value is thruthy
+    return location && <p>Location: {location}</p>
+    /* equavalent to if (location) {return <p>Location: {location}</p>} or,
+        return location ? <p>Location: {location}</p> : undefined */
+}
+
 var templateTwo = (
     <div>
-        <h1>{user.name}</h1>
-        <p>Age: {user.age}</p>
-        <p>Location: {user.location}</p>
+        <h1>{user.name ? user.name : 'Anonymous'}</h1>
+        {
+            (user.age && user.age >= 18) && <p>Age: {user.age}</p>
+            // (if both ^ are truthy) - then and only then, do ^
+        }
+        {getLocation(user.location)}
     </div>
 )
-ReactDOM.render(template, appRoot)
-// ReactDOM.render(templateTwo, appRo ot)
+// ReactDOM.render(template, appRoot)
+ReactDOM.render(templateTwo, appRoot)

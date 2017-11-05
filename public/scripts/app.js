@@ -42,29 +42,35 @@ var user = {
     age: 46,
     location: 'Bristol, England'
 };
-var userName = 'Johnny Choudhury-Lucas';
-var userAge = 46;
-var userLocation = 'Bristol, England';
+function getLocation(location) {
+    // Only render second value if the first value is thruthy
+    return location && React.createElement(
+        'p',
+        null,
+        'Location: ',
+        location
+    );
+    /* equavalent to if (location) {return <p>Location: {location}</p>} or,
+        return location ? <p>Location: {location}</p> : undefined */
+}
+
 var templateTwo = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        user.name
+        user.name ? user.name : 'Anonymous'
     ),
-    React.createElement(
+    user.age && user.age >= 18 && React.createElement(
         'p',
         null,
         'Age: ',
         user.age
-    ),
-    React.createElement(
-        'p',
-        null,
-        'Location: ',
-        user.location
     )
+    // (if both ^ are truthy) - then and only then, do ^
+    ,
+    getLocation(user.location)
 );
-ReactDOM.render(template, appRoot);
-// ReactDOM.render(templateTwo, appRo ot)
+// ReactDOM.render(template, appRoot)
+ReactDOM.render(templateTwo, appRoot);
