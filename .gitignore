@@ -4,4 +4,4 @@ node_modules/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-public/scripts/app.js
+public/scripts/*
