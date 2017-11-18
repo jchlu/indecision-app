@@ -42,12 +42,11 @@ const renderCountApp = () => {
         </div>
     );
     ReactDOM.render(templateThree, appRoot)
-}
+};
 
 renderCountApp();
 
-
-
+/* Previous WIP below here */
 
 const template = (
     <div>
@@ -59,18 +58,21 @@ const template = (
         <li>Item Two</li>
         </ol>
     </div>
-)
+);
+
 const user = {
     name: 'Johnny Choudhury-Lucas',
     age: 46,
     location: 'Bristol, England',
-}
+};
+
 function getLocation(location) {
     // Only render second value if the first value is thruthy
     return location && <p>Location: {location}</p>
     /* equavalent to if (location) {return <p>Location: {location}</p>} or,
         return location ? <p>Location: {location}</p> : undefined */
 };
+
 const templateTwo = (
     <div>
         <h1>{user.name ? user.name : 'Anonymous'}</h1>
@@ -80,6 +82,7 @@ const templateTwo = (
         }
         {getLocation(user.location)}
     </div>
-)
+);
+
 // ReactDOM.render(template, appRoot)
 // ReactDOM.render(templateTwo, appRoot)
