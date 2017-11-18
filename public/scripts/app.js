@@ -7,7 +7,8 @@ var appRoot = document.getElementById('app');
 
 var app = {
     title: 'Indecision App',
-    subTitle: 'Some Info on our App'
+    subTitle: 'Some Info on our App',
+    options: ["One", "Two"]
 };
 var template = React.createElement(
     'div',
@@ -17,10 +18,17 @@ var template = React.createElement(
         null,
         app.title
     ),
-    React.createElement(
+    app.subTitle && React.createElement(
         'p',
         null,
         app.subTitle
+    ),
+    React.createElement(
+        'p',
+        null,
+        ' ',
+        app.options && app.options.length > 0 ? 'Here are your options' : 'No Options',
+        ' '
     ),
     React.createElement(
         'ol',
@@ -72,5 +80,5 @@ var templateTwo = React.createElement(
     ,
     getLocation(user.location)
 );
-// ReactDOM.render(template, appRoot)
-ReactDOM.render(templateTwo, appRoot);
+ReactDOM.render(template, appRoot);
+// ReactDOM.render(templateTwo, appRoot)

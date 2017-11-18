@@ -1,9 +1,9 @@
 console.log('app.js is running')
 
 // JSX - JavaScript XML
-var appRoot = document.getElementById('app')
+const appRoot = document.getElementById('app')
 
-var app = {
+const app = {
     title: 'Indecision App',
     subTitle: 'Some Info on our App',
     options: [
@@ -11,7 +11,7 @@ var app = {
         "Two",
     ]
 }
-var template = (
+const template = (
     <div>
         <h1>{app.title}</h1>
         { app.subTitle && <p>{app.subTitle}</p> }
@@ -22,7 +22,7 @@ var template = (
         </ol>
     </div>
 )
-var user = {
+const user = {
     name: 'Johnny Choudhury-Lucas',
     age: 46,
     location: 'Bristol, England',
@@ -34,7 +34,7 @@ function getLocation(location) {
         return location ? <p>Location: {location}</p> : undefined */
 }
 
-var templateTwo = (
+const templateTwo = (
     <div>
         <h1>{user.name ? user.name : 'Anonymous'}</h1>
         {
