@@ -5,12 +5,17 @@ var appRoot = document.getElementById('app')
 
 var app = {
     title: 'Indecision App',
-    subTitle: 'Some Info on our App'
+    subTitle: 'Some Info on our App',
+    options: [
+        "One",
+        "Two",
+    ]
 }
 var template = (
     <div>
         <h1>{app.title}</h1>
-        <p>{app.subTitle}</p>
+        { app.subTitle && <p>{app.subTitle}</p> }
+        <p> { app.options && app.options.length > 0 ? 'Here are your options' : 'No Options' } </p>
         <ol>
         <li>Item One</li>
         <li>Item Two</li>
@@ -39,5 +44,5 @@ var templateTwo = (
         {getLocation(user.location)}
     </div>
 )
-// ReactDOM.render(template, appRoot)
-ReactDOM.render(templateTwo, appRoot)
+ReactDOM.render(template, appRoot)
+// ReactDOM.render(templateTwo, appRoot)
