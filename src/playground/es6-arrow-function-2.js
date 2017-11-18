@@ -22,7 +22,7 @@ const user = {
     printPlacesWorked5: function (cities) {
         const that = this; // cludge!
         this.cities.forEach(function (city) {
-            console.log('ES5 ' + that.name + ' has worked in ' + city)
+            console.log('ES5 ' + that.name + ' has worked in ' + city);
         });
     },
     printPlacesWorked6() {
@@ -37,9 +37,21 @@ const user = {
         return cityMessages; */
         return this.cities.map((city) => 'ES6 Map ' + this.name + ' has worked in ' + city);
     }
-}
+};
 
-user.printPlacesWorked5();
+/* user.printPlacesWorked5();
 user.printPlacesWorked6();
 console.log(user.printPlacesWorked6Map());
+ */ 
+
  // Challenge:
+
+ const multiplier = {
+    numbers: [1, 2, 3],
+    multiplyBy : 2,
+    multiply() {
+        return this.numbers.map((number) => number * this.multiplyBy);
+    }
+ };
+
+ console.log(multiplier.multiply());
