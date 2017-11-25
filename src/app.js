@@ -7,36 +7,36 @@ const app = {
     title: 'Indecision App',
     subTitle: 'Some Info on our App',
     options: [],
-};
+}
 
 const formOnSubmit = (e) => {
-    e.preventDefault();
-    const option = e.target.elements.option.value;
+    e.preventDefault()
+    const option = e.target.elements.option.value
     if (option) {
-        app.options.push(option);
-        e.target.elements.option.value = '';
+        app.options.push(option)
+        e.target.elements.option.value = ''
     }
-    renderApp();
-};
+    renderApp()
+}
 
 const resetOptions = () => {
     if (app.options.length > 0) {
-        app.options = [];
-        renderApp();
+        app.options = []
+        renderApp()
     }
-};
+}
 
 function renderOptionsListItems() {
     return app.options.map((option) => {
         <li>{ option }</li>
-    });
-};
+    })
+}
 
 const makeDecision = () => {
-    const randomNumber = Math.floor(Math.random() * app.options.length);
-    const option = app.options[randomNumber];
-    alert(option);
-};
+    const randomNumber = Math.floor(Math.random() * app.options.length)
+    const option = app.options[randomNumber]
+    alert(option)
+}
 
 const renderApp = () => {
     const template = (
@@ -54,8 +54,8 @@ const renderApp = () => {
             <button>Add Option</button>
             </form>
         </div>
-    );
+    )
     ReactDOM.render(template, appRoot)
 }
 
-renderApp();
+renderApp()
