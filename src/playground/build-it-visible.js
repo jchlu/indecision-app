@@ -1,11 +1,10 @@
-import React from 'react'
 import ReactDOM from 'react-dom'
 
 const appRoot = document.getElementById('app')
 
 const app = {
   title: 'Visibility App',
-  subTitle: 'Extra details to be show on toggle',
+  subTitle: 'Extra details to be show on toggle'
 }
 
 const buttonShowText = 'Show Details'
@@ -25,7 +24,7 @@ const renderApp = () => {
       <button onClick={toggle}>{visible ? buttonHideText : buttonShowText}</button>
       {visible && <div><p>{app.subTitle}</p></div>}
     </div>
-    )
+  )
   ReactDOM.render(template, appRoot)
 }
 
