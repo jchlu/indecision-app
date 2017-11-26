@@ -1,5 +1,41 @@
-import ReactDOM from 'react-dom'
+class VisibilityToggle extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleToggleVisibility = this.handleToggleVisibility.bind(this)
+    this.buttonShowText = 'Show Details'
+    this.buttonHideText = 'Hide Details'
+    this.title = 'Visibility App'
+    this.subTitle = 'Extra details to be show on toggle'
+    this.state = {
+      visibility: false
+    }
+  }
 
+  handleToggleVisibility () {
+    this.setState((previousState) => {
+      return {
+        visibility: !previousState.visibility
+      }
+    })
+  }
+
+  render () {
+    return (
+      <div>
+        <h1>{this.title}</h1>
+        <button onClick={this.handleToggleVisibility}>
+          {this.state.visibility
+            ? this.buttonHideText
+            : this.buttonShowText}
+        </button>
+        {this.state.visibility && <div><p>{this.subTitle}</p></div>}
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<VisibilityToggle />, document.getElementById('app'))
+/*
 const appRoot = document.getElementById('app')
 
 const app = {
@@ -29,3 +65,4 @@ const renderApp = () => {
 }
 
 renderApp()
+ */

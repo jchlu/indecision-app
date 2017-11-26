@@ -13,7 +13,7 @@ class Counter extends React.Component {
   addOne () {
     // Passing setState a function is the preferred way now & in the future.
     // The "old way" of passing in the changes causes asyncronous bugs and
-    // will likelt be deprecated in future versions
+    // will likely be deprecated in future versions
     this.setState((previousState) => {
       return {
         count: previousState.count + 1
