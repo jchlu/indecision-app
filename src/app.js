@@ -30,21 +30,36 @@ class Header extends React.Component {
 }
 
 class Action extends React.Component {
+  handlePick () {
+    alert('handlePick method called')
+  }
   render () {
     return (
       <div>
-        <button>What should I do?</button>
+        <button onClick={this.handlePick}>What should I do?</button>
       </div>
     )
   }
 }
 
 class Options extends React.Component {
+  constructor (props) {
+    super(props)
+    this.removeAllOptions = this.removeAllOptions.bind(this)
+  }
+
+  removeAllOptions () {
+    console.log(this.props.options)
+    // alert('Remove all options button has been pressed')
+  }
   render () {
     return (
       <div>
+        <button onClick={this.removeAllOptions}>Remove All </button>
         {
-          this.props.options.map((option) => <Option key={option} optionText={option} />)
+          this.props.options.map((option) => {
+            return <Option key={option} optionText={option} />
+          })
         }
       </div>
     )
@@ -60,9 +75,25 @@ class Option extends React.Component {
 }
 
 class AddOption extends React.Component {
+  handleAddOption (e) {
+    e.preventDefault()
+    const option = e.target.elements.option.value.trim()
+    if (option) {
+      alert(`The option: ${option} was added.`)
+      // app.options.push(option)
+      // e.target.elements.option.value = ''
+    }
+    // renderApp()
+  }
   render () {
     return (
-      <div>AddOption Component Here</div>
+      <div>
+        <form onSubmit={this.handleAddOption}>
+          <input type='text' name='option' />
+          <button>Add Option</button>
+        </form>
+
+      </div>
     )
   }
 }
