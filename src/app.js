@@ -62,56 +62,48 @@ class IndecisionApp extends React.Component {
   }
 } // End of IndecisionApp class definition
 
-class Header extends React.Component {
-  render () {
-    return (
-      <div>
-        <h1>{this.props.title}</h1>
-        <h2>{this.props.subTitle}</h2>
-      </div>
-    )
-  }
-} // End of Header class definition
+const Header = (props) => {
+  return (
+    <div>
+      <h1>{props.title}</h1>
+      <h2>{props.subTitle}</h2>
+    </div>
+  )
+} // End of Header stateless functional component definition
 
-class Action extends React.Component {
-  render () {
-    return (
-      <div>
-        {/* {this.props.hasOptions && <button onClick={this.handlePick}>What should I do?</button>} */}
-        <button
-          disabled={!this.props.hasOptions}
-          onClick={this.props.handlePick}
-        >
+const Action = (props) => {
+  return (
+    <div>
+      {/* {this.props.hasOptions && <button onClick={this.handlePick}>What should I do?</button>} */}
+      <button
+        disabled={!props.hasOptions}
+        onClick={props.handlePick}
+      >
           What should I do?
-        </button>
-      </div>
-    )
-  }
-} // End of Action class definition
+      </button>
+    </div>
+  )
+} // End of Action stateless functional component definition
 
-class Options extends React.Component {
-  render () {
-    return (
-      <div>
-        <button onClick={this.props.deleteAllOptions}>Remove All </button>
-        {
-          this.props.options.length > 0 &&
-          this.props.options.map((option) => {
+const Options = (props) => {
+  return (
+    <div>
+      <button onClick={props.deleteAllOptions}>Remove All </button>
+      {
+        props.options.length > 0 &&
+          props.options.map((option) => {
             return <Option key={option} optionText={option} />
           })
-        }
-      </div>
-    )
-  }
-} // End of Options class definition
+      }
+    </div>
+  )
+} // End of Options stateless functional component definition
 
-class Option extends React.Component {
-  render () {
-    return (
-      <p>{this.props.optionText}</p>
-    )
-  }
-} // End of Option class definition
+const Option = (props) => {
+  return (
+    <p>{props.optionText}</p>
+  )
+} // End of Option stateless functional component definition
 
 class AddOption extends React.Component {
   constructor (props) {
@@ -127,9 +119,8 @@ class AddOption extends React.Component {
     const error = this.props.handleAddOption(option)
     e.target.elements.option.value = ''
     this.setState(() => {
-      return {
-        error // shorthand for  error: error
-      }
+      return { error }
+      // shorthand for  error: error
     })
   }
   render () {
