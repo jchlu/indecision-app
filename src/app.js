@@ -2,6 +2,7 @@ class IndecisionApp extends React.Component {
   constructor (props) {
     super(props)
     this.deleteAllOptions = this.deleteAllOptions.bind(this)
+    this.resetAllOptions = this.resetAllOptions.bind(this)
     this.handleAddOption = this.handleAddOption.bind(this)
     this.handlePick = this.handlePick.bind(this)
     this.state = {
@@ -23,6 +24,7 @@ class IndecisionApp extends React.Component {
         <Options
           options={this.state.options}
           deleteAllOptions={this.deleteAllOptions}
+          resetAllOptions={this.resetAllOptions}
         />
         <AddOption
           handleAddOption={this.handleAddOption}
@@ -32,11 +34,11 @@ class IndecisionApp extends React.Component {
   }
 
   deleteAllOptions () {
-    this.setState(() => {
-      return {
-        options: []
-      }
-    })
+    this.setState(() => ({ options: [] }))
+  }
+
+  resetAllOptions () {
+    this.setState(() => ({ options: this.props.options }))
   }
 
   handleAddOption (option) {
@@ -96,6 +98,7 @@ const Options = (props) => {
   return (
     <div>
       <button onClick={props.deleteAllOptions}>Remove All </button>
+      <button onClick={props.resetAllOptions}>Reset to Default </button>
       {
         props.options.length > 0 &&
           props.options.map((option) => {
