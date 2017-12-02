@@ -8,32 +8,46 @@ class Counter extends React.Component {
       count: 0
     }
   }
+  /**
+   * Update count with value from localStorage,
+   * converting to a numeric and checking for NaN
+   */
+  componentDidMount () {
+    try {
+      const count = parseInt(localStorage.getItem('count'))
+      if (!isNaN(count)) {
+        this.setState(() => ({count}))
+      }
+    } catch (error) {
+      // Do nothing
+    }
+  }
+  /**
+   * Check if the previous value is different and update
+   * localStorage so count persists through page reloads
+   * @param {array} previousProps
+   * @param {array} previousState
+   */
+  componentDidUpdate (previousProps, previousState) {
+    if (previousState.count !== this.state.count) {
+      console.log('Updated localStorage count value')
+      localStorage.setItem('count', JSON.stringify(this.state.count))
+    }
+  }
 
   addOne () {
     // Passing setState a function is the preferred way now & in the future.
     // The "old way" of passing in the changes causes asyncronous bugs and
     // will likely be deprecated in future versions
-    this.setState((previousState) => {
-      return {
-        count: previousState.count + 1
-      }
-    })
+    this.setState((previousState) => ({count: previousState.count + 1}))
   }
 
   subtractOne () {
-    this.setState((previousState) => {
-      return {
-        count: previousState.count - 1
-      }
-    })
+    this.setState((previousState) => ({ count: previousState.count - 1 }))
   }
 
-  resetCount (props) {
-    this.setState(() => {
-      return {
-        count: this.props.count
-      }
-    })
+  resetCount () {
+    this.setState(() => ({count: 0}))
   }
 
   render () {
