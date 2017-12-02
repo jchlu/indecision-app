@@ -7,7 +7,7 @@ class IndecisionApp extends React.Component {
     this.handleAddOption = this.handleAddOption.bind(this)
     this.handlePick = this.handlePick.bind(this)
     this.state = {
-      options: props.options
+      options: []
     }
   }
   render () {
@@ -98,11 +98,12 @@ class IndecisionApp extends React.Component {
     console.log(option)
   }
 } // End of IndecisionApp class definition
-
+/*
+// Irrelevent now we use localStorage for passing in data
 IndecisionApp.defaultProps = {
   options: []
 }
-
+ */
 const Header = (props) => {
   return (
     <div>
@@ -198,7 +199,8 @@ class AddOption extends React.Component {
   }
 } // End of AddOption class definition
 
-ReactDOM.render(<IndecisionApp options={['Option 1', 'Option 2', 'Option 4']} />, document.getElementById('app'))
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
+// ReactDOM.render(<IndecisionApp options={['Option 1', 'Option 2', 'Option 4']} />, document.getElementById('app'))
 
 /* const app = (
   <div>
