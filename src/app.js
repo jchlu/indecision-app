@@ -35,6 +35,32 @@ class IndecisionApp extends React.Component {
     )
   }
 
+  /* Read options back from local storage on page reload */
+  componentDidMount () {
+    try {
+      // console.log('componentDidMount')
+      const json = localStorage.getItem('options')
+      const options = JSON.parse(json)
+      if (options) {
+        this.setState(() => ({ options }))
+      }
+    } catch (error) {
+      // Do nothing - fall back to default
+    }
+  }
+
+  /*
+    Takes two parameters, referring to previous props & state
+    We want state - to write the options to local storage
+  */
+  componentDidUpdate (previousProps, previousState) {
+    // console.log('componentDidUpdate')
+    if (previousState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options)
+      localStorage.setItem('options', json)
+    }
+  }
+
   handleDeleteOptions () {
     this.setState(() => ({ options: [] }))
   }
@@ -150,11 +176,13 @@ class AddOption extends React.Component {
     e.preventDefault()
     const option = e.target.elements.option.value.trim()
     const error = this.props.handleAddOption(option)
-    e.target.elements.option.value = ''
     this.setState(() => {
       return { error }
       // shorthand for  error: error
     })
+    if (!error) {
+      e.target.elements.option.value = ''
+    }
   }
   render () {
     return (
