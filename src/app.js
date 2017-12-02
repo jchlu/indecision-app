@@ -1,8 +1,9 @@
 class IndecisionApp extends React.Component {
   constructor (props) {
     super(props)
-    this.deleteAllOptions = this.deleteAllOptions.bind(this)
-    this.resetAllOptions = this.resetAllOptions.bind(this)
+    this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
+    this.handleDeleteOption = this.handleDeleteOption.bind(this)
+    this.handleResetOptions = this.handleResetOptions.bind(this)
     this.handleAddOption = this.handleAddOption.bind(this)
     this.handlePick = this.handlePick.bind(this)
     this.state = {
@@ -23,8 +24,9 @@ class IndecisionApp extends React.Component {
         />
         <Options
           options={this.state.options}
-          deleteAllOptions={this.deleteAllOptions}
-          resetAllOptions={this.resetAllOptions}
+          handleResetOptions={this.handleResetOptions}
+          handleDeleteOptions={this.handleDeleteOptions}
+          handleDeleteOption={this.handleDeleteOption}
         />
         <AddOption
           handleAddOption={this.handleAddOption}
@@ -33,11 +35,20 @@ class IndecisionApp extends React.Component {
     )
   }
 
-  deleteAllOptions () {
+  handleDeleteOptions () {
     this.setState(() => ({ options: [] }))
   }
 
-  resetAllOptions () {
+  handleDeleteOption (optionText) {
+    this.setState((previousState) => {
+      return {
+        options: previousState.options.filter((option) => {
+          return optionText !== option
+        })}
+    })
+  }
+
+  handleResetOptions () {
     this.setState(() => ({ options: this.props.options }))
   }
 
@@ -48,11 +59,11 @@ class IndecisionApp extends React.Component {
     } else if (!option) {
       return 'The option entered was not valid'
     }
-    this.setState((previousState) => {
-      return {
-        options: previousState.options.concat([option])
-      }
-    })
+    this.setState((previousState) => ({
+      // this is the short version rather than using return { blah: blahStuff }
+      // the curly braces need normal braces around to avoid parser errors
+      options: previousState.options.concat([option])
+    }))
   }
 
   handlePick () {
@@ -97,12 +108,18 @@ const Action = (props) => {
 const Options = (props) => {
   return (
     <div>
-      <button onClick={props.deleteAllOptions}>Remove All </button>
-      <button onClick={props.resetAllOptions}>Reset to Default </button>
+      <button onClick={props.handleDeleteOptions}>Remove All</button>
+      <button onClick={props.handleResetOptions}>Reset to Default</button>
       {
         props.options.length > 0 &&
           props.options.map((option) => {
-            return <Option key={option} optionText={option} />
+            return (
+              <Option
+                key={option}
+                optionText={option}
+                handleDeleteOption={props.handleDeleteOption}
+              />
+            )
           })
       }
     </div>
@@ -111,7 +128,13 @@ const Options = (props) => {
 
 const Option = (props) => {
   return (
-    <p>{props.optionText}</p>
+    <p>
+      {props.optionText}
+      <button onClick={(e) => {
+        // Rather than passing the whole event, just pass the option text
+        props.handleDeleteOption(props.optionText)
+      }}>remove</button>
+    </p>
   )
 } // End of Option stateless functional component definition
 
