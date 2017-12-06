@@ -65,9 +65,59 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-console.log('app.js is running!')
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__person__ = __webpack_require__(1);
+
+// With ^^^^ named export, anything can be used as a reference name
+console.log(Object(__WEBPACK_IMPORTED_MODULE_0__person__["c" /* isAdult */])(17))
+console.log(Object(__WEBPACK_IMPORTED_MODULE_0__person__["c" /* isAdult */])(19))
+console.log(Object(__WEBPACK_IMPORTED_MODULE_0__person__["a" /* canDrink */])(17))
+console.log(Object(__WEBPACK_IMPORTED_MODULE_0__person__["a" /* canDrink */])(29))
+console.log(Object(__WEBPACK_IMPORTED_MODULE_0__person__["b" /* default */])(64))
+console.log(Object(__WEBPACK_IMPORTED_MODULE_0__person__["b" /* default */])(67))
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return isAdult; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return canDrink; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return isSenior; });
+const isAdult = (age) => age >= 18
+
+const canDrink = (age) => age >= 21
+
+const isSenior = (age) => {
+  // Long way just for variation
+  return age >= 65
+}
+
+
+
+/**
+ * This could just as well be written thus:
+ * @param {integer} age
+ */
+/*
+ export const isAdult = (age) => age >= 18
+
+export const canDrink = (age) => age >= 21
+
+export default (age) => {
+  // Long way just for variation
+  return age >= 65
+}
+
+// or:
+
+export default (age) => age >= 65
+
+*/
 
 
 /***/ })
