@@ -1,21 +1,51 @@
 import React from 'react'
-import AddOption from './AddOptions'
+import AddOption from './AddOption'
 import Options from './Options'
 import Action from './Action'
 import Header from './Header'
 
 export default class IndecisionApp extends React.Component {
-  constructor (props) {
-    super(props)
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
-    this.handleDeleteOption = this.handleDeleteOption.bind(this)
-    this.handleResetOptions = this.handleResetOptions.bind(this)
-    this.handleAddOption = this.handleAddOption.bind(this)
-    this.handlePick = this.handlePick.bind(this)
-    this.state = {
-      options: []
-    }
+  state = {
+    options: []
   }
+  
+  handleDeleteOptions = () => {
+    this.setState(() => ({ options: [] }))
+  }
+
+  handleDeleteOption = (optionText) => {
+    this.setState((previousState) => {
+      return {
+        options: previousState.options.filter((option) => {
+          return optionText !== option
+        })}
+    })
+  }
+
+  handleResetOptions = () => {
+    // this.setState(() => ({ options: this.props.options }))
+    this.setState(() => ({ options: [] }))
+  }
+
+  handleAddOption = (option) => {
+    if (this.state.options.indexOf(option) > -1) {
+      return 'The option entered already exists'
+    } else if (!option) {
+      return 'The option entered was not valid'
+    }
+    this.setState((previousState) => ({
+      // this is the short version rather than using return { blah: blahStuff }
+      // the curly braces need normal braces around to avoid parser errors
+      options: previousState.options.concat([option])
+    }))
+  }
+
+  handlePick = () => {
+    const randomNumber = Math.floor(Math.random() * this.state.options.length)
+    const option = this.state.options[randomNumber]
+    console.log(option)
+  }
+
   render () {
     const title = 'Indecision App'
     const subTitle = 'Put your life in the hands of a computer'
@@ -68,41 +98,4 @@ export default class IndecisionApp extends React.Component {
     }
   }
 
-  handleDeleteOptions () {
-    this.setState(() => ({ options: [] }))
-  }
-
-  handleDeleteOption (optionText) {
-    this.setState((previousState) => {
-      return {
-        options: previousState.options.filter((option) => {
-          return optionText !== option
-        })}
-    })
-  }
-
-  handleResetOptions () {
-    // this.setState(() => ({ options: this.props.options }))
-    this.setState(() => ({ options: [] }))
-  }
-
-  handleAddOption (option) {
-    console.log(option)
-    if (this.state.options.indexOf(option) > -1) {
-      return 'The option entered already exists'
-    } else if (!option) {
-      return 'The option entered was not valid'
-    }
-    this.setState((previousState) => ({
-      // this is the short version rather than using return { blah: blahStuff }
-      // the curly braces need normal braces around to avoid parser errors
-      options: previousState.options.concat([option])
-    }))
-  }
-
-  handlePick () {
-    const randomNumber = Math.floor(Math.random() * this.state.options.length)
-    const option = this.state.options[randomNumber]
-    console.log(option)
-  }
 } // End of IndecisionApp class definition
