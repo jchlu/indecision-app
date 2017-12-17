@@ -5,6 +5,7 @@ const Action = (props) => {
     <div>
       {/* {this.props.hasOptions && <button onClick={this.handlePick}>What should I do?</button>} */}
       <button
+        className="big-button"
         disabled={!props.hasOptions}
         onClick={props.handlePick}
       >

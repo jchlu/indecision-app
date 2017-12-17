@@ -4,7 +4,7 @@ const Option = (props) => {
   return (
     <p>
       {props.optionText}
-      <button onClick={(e) => {
+      <button className="button button--link" onClick={(e) => {
         // Rather than passing the whole event, just pass the option text
         props.handleDeleteOption(props.optionText)
       }}>remove</button>

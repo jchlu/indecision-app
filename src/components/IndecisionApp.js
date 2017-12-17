@@ -8,7 +8,7 @@ export default class IndecisionApp extends React.Component {
   state = {
     options: []
   }
-  
+
   handleDeleteOptions = () => {
     this.setState(() => ({ options: [] }))
   }
@@ -18,7 +18,8 @@ export default class IndecisionApp extends React.Component {
       return {
         options: previousState.options.filter((option) => {
           return optionText !== option
-        })}
+        })
+      }
     })
   }
 
@@ -46,7 +47,7 @@ export default class IndecisionApp extends React.Component {
     console.log(option)
   }
 
-  render () {
+  render() {
     const title = 'Indecision App'
     const subTitle = 'Put your life in the hands of a computer'
     return (
@@ -55,25 +56,29 @@ export default class IndecisionApp extends React.Component {
           title={title}
           subTitle={subTitle}
         />
-        <Action
-          hasOptions={this.state.options.length > 0}
-          handlePick={this.handlePick}
-        />
-        <Options
-          options={this.state.options}
-          handleResetOptions={this.handleResetOptions}
-          handleDeleteOptions={this.handleDeleteOptions}
-          handleDeleteOption={this.handleDeleteOption}
-        />
-        <AddOption
-          handleAddOption={this.handleAddOption}
-        />
+        <div className="container">
+          <Action
+            hasOptions={this.state.options.length > 0}
+            handlePick={this.handlePick}
+          />
+          <div className="widget">
+            <Options
+              options={this.state.options}
+              handleResetOptions={this.handleResetOptions}
+              handleDeleteOptions={this.handleDeleteOptions}
+              handleDeleteOption={this.handleDeleteOption}
+            />
+            <AddOption
+              handleAddOption={this.handleAddOption}
+            />
+          </div>
+        </div>
       </div>
     )
   }
 
   /* Read options back from local storage on page reload */
-  componentDidMount () {
+  componentDidMount() {
     try {
       // console.log('componentDidMount')
       const json = localStorage.getItem('options')
@@ -90,7 +95,7 @@ export default class IndecisionApp extends React.Component {
     Takes two parameters, referring to previous props & state
     We want state - to write the options to local storage
   */
-  componentDidUpdate (previousProps, previousState) {
+  componentDidUpdate(previousProps, previousState) {
     // console.log('componentDidUpdate')
     if (previousState.options.length !== this.state.options.length) {
       const json = JSON.stringify(this.state.options)
