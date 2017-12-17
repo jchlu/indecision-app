@@ -6,3 +6,4 @@ node_modules/
 !.vscode/extensions.json
 public/scripts/*
 yarn-error.log
+public/bundle.js
