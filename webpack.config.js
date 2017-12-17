@@ -13,11 +13,12 @@ module.exports = {
       exclude: /node_modules/
     },
     {
-      loader: [
+      test: /\.scss$/,
+      use: [
         'style-loader',
-        'css-loader'
-      ],
-      test: /\.css$/
+        'css-loader',
+        'sass-loader'
+      ]
     }]
   },
   devtool: 'cheap-module-eval-source-map',
