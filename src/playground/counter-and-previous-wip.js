@@ -79,7 +79,7 @@ renderCountApp()
 }
 
 const resetCount = () => {
-count = 0;
+count = 0
 console.log('reset clicked')
 renderCountApp()
 }
