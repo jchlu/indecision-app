@@ -52,6 +52,12 @@ export default class IndecisionApp extends React.Component {
     }))
   }
 
+  handleClearSelectedOption  = () => {
+    this.setState(() => ({
+      selectedOption: undefined
+    }))
+  }
+
   render() {
     const title = 'Indecision App'
     const subTitle = 'Put your life in the hands of a computer'
@@ -78,6 +84,7 @@ export default class IndecisionApp extends React.Component {
             />
             <OptionModal
               selectedOption={this.state.selectedOption}
+              handleClearSelectedOption ={this.handleClearSelectedOption }
             />
           </div>
         </div>
